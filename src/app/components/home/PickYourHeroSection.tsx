@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import React from "react";
@@ -59,7 +59,7 @@ export default function PickYourHeroSection() {
                   height={250}
                   className="w-full h-[400px] object-cover rounded-[22px]"
                 />
-                <div className="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+                <div className="absolute top-3 left-3 bg-[#FEC540] text-[#5F0F40] text-xs font-bold px-2 py-1 rounded">
                   {adventure.tag}
                 </div>
                 <button
@@ -75,16 +75,18 @@ export default function PickYourHeroSection() {
                 </button>
                 <div className="absolute bottom-0 bg-white h-10 rounded-t-2xl w-full "></div>
               </div>
-              <div className="px-6 pt-0 pb-10 rounded-t-2xl">
-                <h3 className="text-center text-navy-blue-800 text-xl font-semibold mb-1">
-                  {adventure.title}
-                </h3>
-                <p className="text-center text-gray-600 mb-4 text-sm font-barlow">
-                  {adventure.description}
-                </p>
+              <div className="px-6 pt-0 pb-10 rounded-t-2xl flex flex-col justify-between ">
+                <div>
+                  <h3 className="text-center text-navy-blue-800 text-xl font-semibold mb-1">
+                    {adventure.title}
+                  </h3>
+                  <p className="text-center text-gray-600 mb-4 text-sm font-barlow">
+                    {adventure.description}
+                  </p>
+                </div>
                 <button
                   onClick={() => {}}
-                  className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-orange-500 hover:bg-orange-600 text-white"
+                  className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-[#F28E33] text-white"
                 >
                   Book Your Spot
                 </button>
