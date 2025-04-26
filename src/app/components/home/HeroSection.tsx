@@ -12,12 +12,12 @@ export default function HeroSection() {
         className="absolute"
       />
 
-      <div className="max-w-[1800px] px-[5rem]">
+      <div className="max-w-[1800px] px-10 md:px-[5rem] ">
         <h1 className="text-3xl font-cursive text-white z-20 relative">
           Simsem
         </h1>
 
-        <div className="relative z-20 items-center justify-center h-full grid grid-cols-2">
+        <div className="relative z-20 items-center justify-center h-full grid grid-cols-1 md:grid-cols-2">
           <div className="text-white">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
               Book your <span className="text-yellow-400 font-bold">FREE</span>{" "}
@@ -32,7 +32,7 @@ export default function HeroSection() {
             </p>
           </div>
           <div className="flex items-center flex-row justify-center">
-            <div className="bg-white w-[420px] h-[689px] rounded-[15px] flex">
+            <div className="bg-white w-full md:w-[420px] h-[689px] rounded-[15px] flex">
             </div>
           </div>
         </div>

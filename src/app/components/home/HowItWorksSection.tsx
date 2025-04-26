@@ -16,8 +16,7 @@ const steps = [
   {
     icon: "dance",
     title: "Experience & Share",
-    description:
-      " Enjoy your tour, capture the magic, and create content that inspires others to travel.",
+    description:"Enjoy your tour, capture the magic, and create content that inspires others to travel.",
   },
 ];
 
@@ -51,7 +50,7 @@ export default function HowItWorks() {
               >
                 <Image
                   alt={steps.title}
-                  src={`/images/${steps.icon}.png`}
+                  src={`/icons/${steps.icon}.png`}
                   width={73}
                   height={73}
                 />
