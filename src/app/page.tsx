@@ -4,6 +4,7 @@ import HeroSection from "@/app/components/home/HeroSection";
 import Footer from "@/app/components/layout/footer";
 import HowItWorks from "./components/home/HowItWorksSection";
 import PickYourHeroSection from "./components/home/PickYourHeroSection";
+import WhatsInForYouSection from "./components/home/WhatsInForYouSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <HeroSection />
         <HowItWorks />
         <PickYourHeroSection />
+        <WhatsInForYouSection />
       </main>
       <Footer />
     </div>

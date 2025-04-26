@@ -33,7 +33,7 @@ const adventures = [
 export default function PickYourHeroSection() {
   return (
     <section className="w-full py-16 bg-[#DCB59733]">
-      <div className="max-w-8xl px-[5rem] flex items-center flex-col">
+      <div className="max-w-8xl px-[2rem] md:px-[5rem] flex items-center flex-col">
         <h3 className="text-[20px] text-[#FB8B24] text-center">
           Pickup your Experience
         </h3>
