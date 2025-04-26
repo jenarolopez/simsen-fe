@@ -77,7 +77,7 @@ export default function PickYourHeroSection() {
               </div>
               <div className="px-6 pt-0 pb-10 rounded-t-2xl flex flex-col justify-between ">
                 <div>
-                  <h3 className="text-center text-navy-blue-800 text-xl font-semibold mb-1">
+                  <h3 className="text-center text-[#0D2E61] text-xl font-semibold mb-1">
                     {adventure.title}
                   </h3>
                   <p className="text-center text-gray-600 mb-4 text-sm font-barlow">

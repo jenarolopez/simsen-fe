@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="mb-8 md:mb-0">
           <Image
             aria-hidden
-            src="/images/logo.png"
+            src="/icons/logo.png"
             alt="Simsen Logo"
             width={212}
             height={88}
