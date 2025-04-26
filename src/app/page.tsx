@@ -5,6 +5,7 @@ import HowItWorks from "./components/home/HowItWorksSection";
 import PickYourHeroSection from "./components/home/PickYourHeroSection";
 import WhatsInForYouSection from "./components/home/WhatsInForYouSection";
 import WhatWeDo from "./components/home/WhatWeDo";
+import Traveler from "./components/home/TravelerSection";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <PickYourHeroSection />
         <WhatsInForYouSection />
         <WhatWeDo />
+        <Traveler />
       </main>
       <Footer />
     </div>
