@@ -11,9 +11,16 @@ import { bookFormSchema, type BookFormValues } from "../lib/schemas/bookForm";
 import { toast } from "sonner";
 
 export default function BookForm() {
-  const { adventures, adventureId, setAdventureId, setBookDetails } = useAppContext();
+  const {
+    adventures,
+    adventureId,
+    setAdventureId,
+    setBookDetails,
+    setStepsOpen,
+    resetForm,
+    setResetForm
+  } = useAppContext();
   const [userCountry, setUserCountry] = useState("US");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -24,6 +31,10 @@ export default function BookForm() {
     resolver: zodResolver(bookFormSchema),
     defaultValues: {
       experience: adventureId || "",
+      fullName: "",
+      email: "",
+      phone: "",
+      referral: ""
     },
   });
 
@@ -41,36 +52,38 @@ export default function BookForm() {
     }
   }, [adventureId, setValue]);
 
+  // Add useEffect for form reset
+  useEffect(() => {
+    if (resetForm) {
+      // Reset each field to default value
+      setValue("experience", "");
+      setValue("fullName", "");
+      setValue("email", "");
+      setValue("phone", "");
+      setValue("referral", "");
+      
+      setAdventureId(null);
+      setUserCountry("US");
+      setResetForm(false); // Reset the flag after form is cleared
+    }
+  }, [resetForm, setValue, setAdventureId, setResetForm]);
+
   const onSubmit = async (data: BookFormValues) => {
-    setIsSubmitting(true);
+    setValue("experience", "");
     try {
-      setBookDetails(prev=>({
+      setBookDetails((prev) => ({
         ...prev,
+        email: data.email,
         fullName: data.fullName,
         phoneNumber: data.phone,
         experienceId: adventureId ? adventureId : "",
-        referral:data.referral,
-      }))
-      // Replace with your API endpoint
-      // const response = await fetch("/api/book", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data),
-      // });
-
-      // if (!response.ok) throw new Error("Submission failed");
-
-      // toast.success("Booking submitted successfully!");
-      // // Optional: Reset form or redirect
-      
-    
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+        referral: data.referral,
+      }));
+      setStepsOpen(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error("Failed to submit booking. Please try again.");
     } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -83,7 +96,9 @@ export default function BookForm() {
           placeholder="Enter your full name"
           {...register("fullName")}
           className={`${
-            errors.fullName ? "border-red-500 focus:border-red-500" : "border-[#5F0F4026]"
+            errors.fullName
+              ? "border-red-500 focus:border-red-500"
+              : "border-[#5F0F4026]"
           }`}
         />
       </div>
@@ -96,7 +111,9 @@ export default function BookForm() {
           placeholder="Enter your email"
           {...register("email")}
           className={`${
-            errors.email ? "border-red-500 focus:border-red-500" : "border-[#5F0F4026]"
+            errors.email
+              ? "border-red-500 focus:border-red-500"
+              : "border-[#5F0F4026]"
           }`}
         />
       </div>
@@ -120,7 +137,9 @@ export default function BookForm() {
             type="tel"
             placeholder="(555) 555-5555"
             className={`rounded-l-none ${
-              errors.phone ? "border-red-500 focus:border-red-500" : "border-[#5F0F4026]"
+              errors.phone
+                ? "border-red-500 focus:border-red-500"
+                : "border-[#5F0F4026]"
             }`}
             {...register("phone")}
           />
@@ -133,7 +152,9 @@ export default function BookForm() {
           id="referral"
           {...register("referral")}
           className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-            errors.referral ? "border-red-500 focus:border-red-500" : "border-[#5F0F4026]"
+            errors.referral
+              ? "border-red-500 focus:border-red-500"
+              : "border-[#5F0F4026]"
           }`}
         >
           <option value="">Select an option</option>
@@ -154,7 +175,9 @@ export default function BookForm() {
             setValue("experience", e.target.value);
           }}
           className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-            errors.experience ? "border-red-500 focus:border-red-500" : "border-[#5F0F4026]"
+            errors.experience
+              ? "border-red-500 focus:border-red-500"
+              : "border-[#5F0F4026]"
           }`}
         >
           <option value="">Select Experience</option>
@@ -169,17 +192,9 @@ export default function BookForm() {
       <Button
         type="submit"
         className="w-full bg-amber-500 hover:bg-amber-600 text-white"
-        disabled={isSubmitting}
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {"Submit"}
       </Button>
     </form>
   );
-}
-
-
-export const BookStep = () => {
-  return <div>
-
-  </div>
 }

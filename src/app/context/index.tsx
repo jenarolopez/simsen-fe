@@ -14,8 +14,12 @@ interface AppContextType {
   setAdventureId: (id: string | null) => void;
   adventures: Adventures[];
   setAdventures: Dispatch<SetStateAction<Adventures[]>>;
+  stepsOpen: boolean;
+  setStepsOpen: Dispatch<SetStateAction<boolean>>;
   bookDetails: BookDetails;
   setBookDetails: Dispatch<SetStateAction<BookDetails>>;
+  resetForm: boolean, 
+  setResetForm: Dispatch<SetStateAction<boolean>>;
 }
 
 interface Tourist {
@@ -29,30 +33,39 @@ interface BookDetails {
   referral: string,
   experienceId: string,
   bookDate: string,
+  numberOfTourist: string,
   tourist: Tourist[]
+}
+
+export const defaultBooking = {
+  fullName: '',
+  email: '',
+  phoneNumber: '',
+  referral: '',
+  experienceId: '',
+  bookDate: '',
+  numberOfTourist: '1',
+  tourist: [
+    {
+      name: '',
+      email: ''
+    }
+  ]
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
   const [adventureId, setAdventureId] = useState<string | null>(null);
+  const [resetForm, setResetForm] = useState<boolean>(false);
   const [adventures, setAdventures] = useState<Adventures[]>([]);
   const [bookDetails, setBookDetails] = useState<BookDetails>({
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    referral: '',
-    experienceId: adventureId ? adventureId : '',
-    bookDate: '',
-    tourist: [
-      {
-        name: '',
-        email: ''
-      }
-    ]
+    ...defaultBooking,
+    experienceId: adventureId ? adventureId : ""
   })
+  const [stepsOpen, setStepsOpen] = useState(false)
   return (
-    <AppContext.Provider value={{ adventureId, setAdventureId, adventures, setAdventures, bookDetails, setBookDetails }}>
+    <AppContext.Provider value={{ adventureId, setAdventureId, adventures, setAdventures, bookDetails, setBookDetails, stepsOpen, setStepsOpen, resetForm, setResetForm }}>
       {children}
     </AppContext.Provider>
   );

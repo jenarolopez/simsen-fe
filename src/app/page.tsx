@@ -8,6 +8,7 @@ import WhatWeDo from "./components/WhatWeDo";
 import Traveler from "./components/TravelerSection";
 import LetUsKnowSection from "./components/LetUsKnowSection";
 import { AppContextProvider } from "./context";
+import BookFormDialog from "./components/BookFormDialog";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           <WhatWeDo />
           <Traveler />
           <LetUsKnowSection />
+          <BookFormDialog />
         </main>
       </AppContextProvider>
       <Footer />

@@ -33,8 +33,7 @@ const AdventureCardSkeleton = () => (
 );
 
 export default function PickYourHeroSection() {
-  
-  const { setAdventures, adventures } = useAppContext();
+  const { setAdventures, adventures, setAdventureId } = useAppContext();
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(true);
 
@@ -131,6 +130,7 @@ export default function PickYourHeroSection() {
                           behavior: "smooth",
                           block: "start",
                         });
+                      setAdventureId(adventure.id);
                     }}
                     className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-[#F28E33] text-white"
                   >
