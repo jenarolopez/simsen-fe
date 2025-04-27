@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import { Button } from "../ui/button";
 
 const adventures = [
   {
@@ -84,12 +85,14 @@ export default function PickYourHeroSection() {
                     {adventure.description}
                   </p>
                 </div>
-                <button
+                
+                <Button
                   onClick={() => {}}
+                  
                   className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-[#F28E33] text-white"
                 >
                   Book Your Spot
-                </button>
+                </Button>
               </div>
             </div>
           ))}

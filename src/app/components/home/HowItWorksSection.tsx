@@ -22,7 +22,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[#0D2E61] w-full color-white py-10 ">
+    <section className="bg-[#0D2E61] w-full text-white py-10 ">
       <div className="max-w-8xl px-[5rem] flex flex-col items-center">
         <h1 className="text-[45px] text-[#FB8B24] py-6"> How It Works</h1>
         <div className="max-w-[980px] px-5">
