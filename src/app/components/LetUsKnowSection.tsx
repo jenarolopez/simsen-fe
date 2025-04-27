@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export default function LetUsKnowSection() {
@@ -16,9 +17,9 @@ export default function LetUsKnowSection() {
           bridge of understanding and appreciation among travelers and locals,
           your authentic participation is a must.
         </p>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md font-medium">
+        <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 font-medium">
           Confirm Attendance
-        </button>
+        </Button>
       </div>
     </section>
   );

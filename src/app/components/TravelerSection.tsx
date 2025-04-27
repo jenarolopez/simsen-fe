@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
@@ -82,7 +83,7 @@ export default function TravelerSection() {
 
         <div className="flex flex-row items-center justify-center gap-3 mt-6">
           {testimony.map((_, index) => (
-            <button
+            <Button
               key={index}
               className={`w-3 h-3 rounded-full transition-colors ${
                 currentSlide === index ? "bg-[#FB8B24]" : "bg-gray-300"

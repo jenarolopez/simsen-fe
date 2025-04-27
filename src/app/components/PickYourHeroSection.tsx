@@ -4,6 +4,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "../../components/ui/button";
 import { useAppContext } from "../context";
+import { Dialog, DialogTitle } from "@radix-ui/react-dialog";
+import { DialogContent, DialogHeader } from "@/components/ui/dialog";
+import AdventureForm from "./AdventureForm";
+import { PencilIcon } from "lucide-react";
 
 export type Adventures = {
   id: string;
@@ -12,6 +16,7 @@ export type Adventures = {
   tag: string;
   image_url: string;
   isCompleted: boolean;
+  referenceId: string;
 };
 
 const AdventureCardSkeleton = () => (
@@ -33,11 +38,12 @@ const AdventureCardSkeleton = () => (
 );
 
 export default function PickYourHeroSection() {
-  const { setAdventures, adventures, setAdventureId } = useAppContext();
+  const { setAdventures, adventures, setAdventureId, adventureId } =
+    useAppContext();
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>([]);
-
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const fetchAdventures = async () => {
       try {
@@ -64,7 +70,7 @@ export default function PickYourHeroSection() {
         const response = await fetch("/api/favorites?userId=userId");
         if (!response.ok) throw new Error("Failed to fetch favorites");
         const data = await response.json();
-        console.log(data,'data')
+        console.log(data, "data");
         setFavorites(data);
       } catch (error) {
         console.error("Error fetching favorites:", error);
@@ -86,13 +92,13 @@ export default function PickYourHeroSection() {
       });
 
       if (!response.ok) throw new Error("Failed to toggle favorite");
-      
+
       const { favorited } = await response.json();
-      
-      setFavorites(prev => 
-        favorited 
+
+      setFavorites((prev) =>
+        favorited
           ? [...prev, adventureId]
-          : prev.filter(id => id !== adventureId)
+          : prev.filter((id) => id !== adventureId)
       );
     } catch (error) {
       console.error("Error toggling favorite:", error);
@@ -125,9 +131,16 @@ export default function PickYourHeroSection() {
             adventures.map((adventure, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-md overflow-hidden"
+                className="bg-white rounded-2xl shadow-md overflow-hidden relative"
               >
                 <div className="relative">
+                  <Button className="absolute z-10 right-[20px] top-[100px] rounded-full bg-white w-[50px] h-[50px]" onClick={()=>{
+                    setAdventureId(adventure.id)
+                    setIsOpen(true)
+                   
+                  }}>
+                    <PencilIcon className=" " width={40} height={40}/>
+                  </Button>
                   <Image
                     src={
                       adventure.image_url
@@ -142,17 +155,25 @@ export default function PickYourHeroSection() {
                   <div className="absolute top-3 left-3 bg-[#FEC540] text-[#5F0F40] text-xs font-bold px-2 py-1 rounded">
                     {adventure.tag}
                   </div>
-                  <button
+                  <Button
                     onClick={() => toggleFavorite(adventure.id)}
                     className="absolute top-3 right-3 z-10 cursor-pointer"
                   >
                     <Image
-                      src={favorites.includes(adventure.id) ? "/icons/heart-filled.png" : "/icons/heart.png"}
-                      alt={favorites.includes(adventure.id) ? "Remove from favorites" : "Add to favorites"}
+                      src={
+                        favorites.includes(adventure.id)
+                          ? "/icons/heart-filled.png"
+                          : "/icons/heart.png"
+                      }
+                      alt={
+                        favorites.includes(adventure.id)
+                          ? "Remove from favorites"
+                          : "Add to favorites"
+                      }
                       width={35}
                       height={31}
                     />
-                  </button>
+                  </Button>
                   <div className="absolute bottom-0 bg-white h-10 rounded-t-2xl w-full "></div>
                 </div>
                 <div className="px-6 pt-0 pb-10 rounded-t-2xl flex flex-col justify-between ">
@@ -175,6 +196,7 @@ export default function PickYourHeroSection() {
                         });
                       setAdventureId(adventure.id);
                     }}
+                    disabled={adventure.isCompleted}
                     className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-[#F28E33] text-white"
                   >
                     Book Your Spot
@@ -185,6 +207,24 @@ export default function PickYourHeroSection() {
           )}
         </div>
       </div>
+     
+
+      {adventureId && adventures && (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent className="bg-white">
+            <DialogHeader>
+              <DialogTitle>Update adventure</DialogTitle>
+            </DialogHeader>
+            <AdventureForm
+              onClose={() => setIsOpen(false)}
+              adventure={
+                adventures.find((adv) => adv.id === adventureId) ||
+                adventures[0]
+              }
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
   );
 }

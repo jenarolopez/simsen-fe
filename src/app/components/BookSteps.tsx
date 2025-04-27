@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingStep1Schema, bookingStep2Schema } from "../lib/schemas/bookStepForm";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 export const BookStep = () => {
   const [step, setStep] = useState(1);
@@ -121,12 +122,12 @@ export const BookStep = () => {
               />
             </div>
 
-            <button
+            <Button
               onClick={handleNext}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-medium"
             >
               NEXT
-            </button>
+            </Button>
           </div>
         )}
 
@@ -163,12 +164,12 @@ export const BookStep = () => {
               ))}
             </div>
 
-            <button
+            <Button
               onClick={handleSubmit}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-medium"
             >
               BOOK NOW
-            </button>
+            </Button>
           </div>
         )}
       </div>
