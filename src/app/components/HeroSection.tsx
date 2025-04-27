@@ -59,7 +59,7 @@ export default function HeroSection() {
                   <div>
                     <label htmlFor="phone">Phone Number</label>
                     <div className="flex">
-                      <select className="bg-gray-50 border border-[#5F0F4026] text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                      <select defaultValue={"WF"} className="bg-gray-50 border border-[#5F0F4026] text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
                         {
                           countryCode.map(code => <option key={code.code} value={code.code}>{code.code} {code.dial_code}</option>)
                         }
@@ -77,9 +77,10 @@ export default function HeroSection() {
                     <label htmlFor="referral">How did you hear about us?</label>
                     <select
                       id="referral"
+                      defaultValue={""}
                       className="flex h-10 w-full rounded-md border border-input border-[#5F0F4026] bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Select an option
                       </option>
                       <option value="social">Social Media</option>
@@ -93,9 +94,10 @@ export default function HeroSection() {
                     <label htmlFor="experience">Select Experience</label>
                     <select
                       id="experience"
+                      defaultValue={""}
                       className="flex h-10 w-full rounded-md border border-input border-[#5F0F4026] bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Select Experience
                       </option>
                       <option value="culture">Cultural Tour</option>
