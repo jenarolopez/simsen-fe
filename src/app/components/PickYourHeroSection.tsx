@@ -3,13 +3,16 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "../../components/ui/button";
+import { useAppContext } from "../context";
 
-type Adventures = {
-  title: string,
-  description: string
-  tag: string,
-  image_url: string,
-}
+export type Adventures = {
+  id: string;
+  title: string;
+  description: string;
+  tag: string;
+  image_url: string;
+  isCompleted: boolean;
+};
 
 const AdventureCardSkeleton = () => (
   <div className="bg-white rounded-2xl shadow-md overflow-hidden animate-pulse min-w-[300px]">
@@ -30,11 +33,10 @@ const AdventureCardSkeleton = () => (
 );
 
 export default function PickYourHeroSection() {
-
-  const [adventures, setAdventures] = useState<Adventures[]>([]);
+  
+  const { setAdventures, adventures } = useAppContext();
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(true);
-  console.log(error, loading, adventures);
 
   useEffect(() => {
     const fetchAdventures = async () => {
@@ -42,9 +44,9 @@ export default function PickYourHeroSection() {
         const res = await fetch("/api/adventures");
         if (!res.ok) throw new Error("Failed to fetch adventures");
         const data: Adventures[] = await res.json();
-        console.log(res,"ress")
+
         setAdventures(data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -76,9 +78,7 @@ export default function PickYourHeroSection() {
               <AdventureCardSkeleton key={index} />
             ))
           ) : error ? (
-            <div className="col-span-3 text-center text-red-500">
-              {error}
-            </div>
+            <div className="col-span-3 text-center text-red-500">{error}</div>
           ) : (
             adventures.map((adventure, index) => (
               <div
@@ -87,7 +87,11 @@ export default function PickYourHeroSection() {
               >
                 <div className="relative">
                   <Image
-                    src={adventure.image_url ? adventure.image_url : "/images/placeholder.png"}
+                    src={
+                      adventure.image_url
+                        ? adventure.image_url
+                        : "/images/placeholder.png"
+                    }
                     alt={adventure.title}
                     width={400}
                     height={250}
@@ -120,7 +124,14 @@ export default function PickYourHeroSection() {
                   </div>
 
                   <Button
-                    onClick={() => {}}
+                    onClick={() => {
+                      document
+                        .getElementById("booking-section")
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }}
                     className="w-full font-barlow rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none cursor-pointer px-20 bg-[#F28E33] text-white"
                   >
                     Book Your Spot
