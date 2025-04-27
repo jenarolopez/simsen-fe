@@ -54,7 +54,7 @@ export default function PickYourHeroSection() {
     };
 
     fetchAdventures();
-  }, []);
+  }, [setAdventures]);
 
   return (
     <section className="w-full py-16 bg-[#DCB59733]">

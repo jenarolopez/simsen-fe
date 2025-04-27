@@ -5,12 +5,12 @@ import { db } from "../../../../../lib/firebase";
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    console.log(params)
+    const newParams = await params
     const { status } = await request.json();
-    const docRef = doc(db, "bookings", params.id);
+    const docRef = doc(db, "bookings", newParams.id);
     
     await updateDoc(docRef, {
       status: status.toLowerCase(),
