@@ -53,22 +53,26 @@ export default function TravelerSection() {
             {testimony.map((data, index) => (
               <div
                 key={index}
-                className="flex flex-col bg-white rounded-[22px] shadow-lg w-full flex-shrink-0 p-6 items-center"
+                className="flex flex-col w-full flex-shrink-0 p-6"
               >
-                <p className="text-gray-700 mb-4">{data.desctiption}</p>
-                <Image
-                  src={`/images/${data.image}.png`}
-                  width={74}
-                  height={74}
-                  alt={`Testimonial by ${data.name}`}
-                  className="w-16 h-16 rounded-full object-cover mb-4"
-                />
-                <div className="flex items-center justify-between flex-col">
-                  <span className="font-semibold">{data.name}</span>
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, index) => (
-                      <span key={index} className="text-yellow-500">★</span>
-                    ))}
+                <div className="m-1 bg-white w-full h-full rounded-[22px] flex flex-col py-10 items-center shadow-lg">
+                  <p className="text-gray-700 mb-4">{data.desctiption}</p>
+                  <Image
+                    src={`/images/${data.image}.png`}
+                    width={74}
+                    height={74}
+                    alt={`Testimonial by ${data.name}`}
+                    className="w-16 h-16 rounded-full object-cover mb-4"
+                  />
+                  <div className="flex items-center justify-between flex-col">
+                    <span className="font-semibold">{data.name}</span>
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, index) => (
+                        <span key={index} className="text-yellow-500">
+                          ★
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
