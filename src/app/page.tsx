@@ -1,12 +1,12 @@
-import HeroSection from "@/app/components/home/HeroSection";
+import HeroSection from "@/app/components/HeroSection";
 
-import Footer from "@/app/components/layout/footer";
-import HowItWorks from "./components/home/HowItWorksSection";
-import PickYourHeroSection from "./components/home/PickYourHeroSection";
-import WhatsInForYouSection from "./components/home/WhatsInForYouSection";
-import WhatWeDo from "./components/home/WhatWeDo";
-import Traveler from "./components/home/TravelerSection";
-import LetUsKnowSection from "./components/home/LetUsKnowSection";
+import Footer from "@/components/layout/footer";
+import HowItWorks from "./components/HowItWorksSection";
+import PickYourHeroSection from "./components/PickYourHeroSection";
+import WhatsInForYouSection from "./components/WhatsInForYouSection";
+import WhatWeDo from "./components/WhatWeDo";
+import Traveler from "./components/TravelerSection";
+import LetUsKnowSection from "./components/LetUsKnowSection";
 
 export default function Home() {
   return (

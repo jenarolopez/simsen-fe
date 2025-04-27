@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { countryCode } from "../../../lib/contryCodes";
+
 
 export default function HeroSection() {
   return (
@@ -58,9 +60,9 @@ export default function HeroSection() {
                     <label htmlFor="phone">Phone Number</label>
                     <div className="flex">
                       <select className="bg-gray-50 border border-[#5F0F4026] text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                        <option value="US">🇺🇸 +1</option>
-                        <option value="UK">🇬🇧 +44</option>
-                        <option value="AU">🇦🇺 +61</option>
+                        {
+                          countryCode.map(code => <option key={code.code} value={code.code}>{code.code} {code.dial_code}</option>)
+                        }
                       </select>
                       <Input
                         id="phone"
