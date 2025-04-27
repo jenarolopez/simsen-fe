@@ -36,6 +36,7 @@ export default function PickYourHeroSection() {
   const { setAdventures, adventures, setAdventureId } = useAppContext();
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchAdventures = async () => {
@@ -55,6 +56,48 @@ export default function PickYourHeroSection() {
 
     fetchAdventures();
   }, [setAdventures]);
+
+  // Add useEffect to fetch favorites
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const response = await fetch("/api/favorites?userId=userId");
+        if (!response.ok) throw new Error("Failed to fetch favorites");
+        const data = await response.json();
+        console.log(data,'data')
+        setFavorites(data);
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    };
+
+    fetchFavorites();
+  }, []); // Run once on mount
+
+  // Add toggle favorite function
+  const toggleFavorite = async (adventureId: string) => {
+    try {
+      const response = await fetch("/api/favorites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ adventureId }),
+      });
+
+      if (!response.ok) throw new Error("Failed to toggle favorite");
+      
+      const { favorited } = await response.json();
+      
+      setFavorites(prev => 
+        favorited 
+          ? [...prev, adventureId]
+          : prev.filter(id => id !== adventureId)
+      );
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
 
   return (
     <section className="w-full py-16 bg-[#DCB59733]">
@@ -100,12 +143,12 @@ export default function PickYourHeroSection() {
                     {adventure.tag}
                   </div>
                   <button
-                    onClick={() => {}}
+                    onClick={() => toggleFavorite(adventure.id)}
                     className="absolute top-3 right-3 z-10 cursor-pointer"
                   >
                     <Image
-                      src={`/icons/heart.png`}
-                      alt={adventure.title}
+                      src={favorites.includes(adventure.id) ? "/icons/heart-filled.png" : "/icons/heart.png"}
+                      alt={favorites.includes(adventure.id) ? "Remove from favorites" : "Add to favorites"}
                       width={35}
                       height={31}
                     />
