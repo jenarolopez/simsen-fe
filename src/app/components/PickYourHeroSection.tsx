@@ -4,8 +4,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "../../components/ui/button";
 import { useAppContext } from "../context";
-import { Dialog, DialogTitle } from "@radix-ui/react-dialog";
-import { DialogContent, DialogHeader } from "@/components/ui/dialog";
+
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import AdventureForm from "./AdventureForm";
 import { PencilIcon } from "lucide-react";
 
