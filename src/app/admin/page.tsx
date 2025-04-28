@@ -5,9 +5,10 @@ import { Search, LogOut } from "lucide-react";
 import TouristDialog from "@/app/admin/components/TouristDialog";
 
 import { Badge } from "../../components/ui/badge";
-import { Button } from "../../components/ui/button";
+
 import { Tabs, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Input } from "../../components/ui/input";
+import { Button } from "@/components/ui/button";
 
 // Define the type for our user data
 export interface User {
@@ -117,7 +118,7 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
           <div className="flex items-center gap-4">
-            <span className="font-medium">Raf</span>
+            {/* <span className="font-medium">Raf</span>
             <Button
               variant="destructive"
               size="sm"
@@ -125,7 +126,7 @@ export default function AdminDashboard() {
             >
               <LogOut className="h-4 w-4" />
               Logout
-            </Button>
+            </Button> */}
           </div>
         </div>
 
@@ -203,7 +204,7 @@ export default function AdminDashboard() {
                     {user.status === "pending" && (
                       <div className="flex gap-2">
                         <Button
-                          size="sm"
+                          
                           className="bg-orange-500 hover:bg-orange-600"
                           onClick={() =>
                             handleStatusChange(user.referenceId, "approved")
@@ -212,7 +213,7 @@ export default function AdminDashboard() {
                           Approve
                         </Button>
                         <Button
-                          size="sm"
+                          
                           className="bg-orange-500 hover:bg-orange-600"
                           onClick={() =>
                             handleStatusChange(user.referenceId, "declined")
@@ -222,12 +223,12 @@ export default function AdminDashboard() {
                         </Button>
                       </div>
                     )}
-                    <button
+                    <Button
                       onClick={() => openDialog(user)}
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
                     >
                       View Details
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}
