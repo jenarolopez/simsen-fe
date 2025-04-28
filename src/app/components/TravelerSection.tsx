@@ -24,7 +24,7 @@ export default function TravelerSection() {
         const data: Testimonial[] = await res.json();
 
         setTestimonials(data);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message);
       } finally {
