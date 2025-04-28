@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { Search, LogOut } from "lucide-react";
 import TouristDialog from "@/app/admin/components/TouristDialog";
 
 import { Badge } from "../../components/ui/badge";
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
           <div className="flex items-center gap-4">
-            {/* <span className="font-medium">Raf</span>
+            <span className="font-medium">Raf</span>
             <Button
               variant="destructive"
               size="sm"
@@ -126,7 +126,7 @@ export default function AdminDashboard() {
             >
               <LogOut className="h-4 w-4" />
               Logout
-            </Button> */}
+            </Button>
           </div>
         </div>
 
