@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, LogOut } from "lucide-react";
+import { Search } from "lucide-react";
 import TouristDialog from "@/app/admin/components/TouristDialog";
 
 import { Badge } from "../../components/ui/badge";
