@@ -24,6 +24,7 @@ export default function TravelerSection() {
         const data: Testimonial[] = await res.json();
 
         setTestimonials(data);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -71,6 +72,12 @@ export default function TravelerSection() {
                 </div>
               ))}
             </div>
+          ) : error ? (
+            // Error message
+            <div className="text-red-500 text-center py-10">
+              <p>Failed to load testimonials. Please try again later.</p>
+              <p className="text-sm">{error}</p>
+            </div>
           ) : (
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -114,7 +121,7 @@ export default function TravelerSection() {
           )}
         </div>
 
-        {!loading && (
+        {!loading && !error && (
           <div className="flex flex-row items-center justify-center gap-3 mt-6">
             {testimonials.map((_, index) => (
               <Button
