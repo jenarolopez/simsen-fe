@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Search, LogOut } from "lucide-react";
+import TouristDialog from "@/app/admin/components/TouristDialog";
 
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
@@ -9,7 +10,7 @@ import { Tabs, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Input } from "../../components/ui/input";
 
 // Define the type for our user data
-interface User {
+export interface User {
   id: string;
   fullName: string;
   email: string;
@@ -28,51 +29,60 @@ interface User {
 }
 
 export default function AdminDashboard() {
-
-  
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const openDialog = (user: User) => {
+    setSelectedUser(user);
+    setIsDialogOpen(true);
+  };
 
-  useEffect(()=>{
+  const closeDialog = () => {
+    setSelectedUser(null);
+    setIsDialogOpen(false);
+  };
+
+  useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await fetch('/api/bookings');
-        if (!response.ok) throw new Error('Failed to fetch bookings');
+        const response = await fetch("/api/bookings");
+        if (!response.ok) throw new Error("Failed to fetch bookings");
         const bookings = await response.json();
-        setUsers(bookings)
-        console.log(bookings,'')
+        setUsers(bookings);
+        console.log(bookings, "");
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         return [];
       }
     };
-    fetchBookings()
-  },[])
+    fetchBookings();
+  }, []);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
       const response = await fetch(`/api/bookings/${id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ status: newStatus }),
       });
-  
+
       if (!response.ok) {
-        throw new Error('Failed to update status');
+        throw new Error("Failed to update status");
       }
-  
+
       // Update local state
       const updatedUsers = users.map((user) =>
         user.referenceId === id ? { ...user, status: newStatus.toLowerCase() } : user
       );
       setUsers(updatedUsers);
     } catch (error) {
-      console.error('Error updating status:', error);
+      console.error("Error updating status:", error);
     }
   };
 
@@ -212,6 +222,12 @@ export default function AdminDashboard() {
                         </Button>
                       </div>
                     )}
+                    <button
+                      onClick={() => openDialog(user)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                      View Details
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -219,6 +235,9 @@ export default function AdminDashboard() {
           </table>
         </div>
       </div>
+
+      {/* Tourist Dialog */}
+      <TouristDialog isOpen={isDialogOpen} onClose={closeDialog} user={selectedUser} />
     </div>
   );
 }
