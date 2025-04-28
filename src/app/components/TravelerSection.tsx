@@ -22,7 +22,7 @@ export default function TravelerSection() {
         const res = await fetch("/api/testimonials");
         if (!res.ok) throw new Error("Failed to fetch testimonials");
         const data: Testimonial[] = await res.json();
-
+       
         setTestimonials(data);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
@@ -48,9 +48,10 @@ export default function TravelerSection() {
   };
 
   return (
-    <section className="w-full pt-16 bg-[#9A031E0F] relative text-black">
-      <div className="max-w-8xl px-[2rem] md:px-[5rem] flex items-center flex-col">
-        <span className="text-[#FB8B24] text-[45px] mb-8">
+    <section className="w-full pt-16 pb-28 bg-white relative text-black">
+      <div className="absolute bg-[#9A031E0F] w-full h-[450px]"></div>
+      <div className="max-w-8xl px-[2rem] md:px-[5rem] flex items-center flex-col mt-20">
+        <span className="text-[#FB8B24] text-[45px] mb-8 text-center">
           What travelers says about us?
         </span>
 
@@ -61,7 +62,7 @@ export default function TravelerSection() {
               {[...Array(3)].map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-col w-full flex-shrink-0 p-6"
+                  className="flex flex-col w-full flex-shrink-0 p-6 min-h-[400px]"
                 >
                   <div className="m-1 bg-gray-200 w-full h-full rounded-[22px] flex flex-col py-10 items-center shadow-lg animate-pulse">
                     <div className="bg-gray-300 h-6 w-3/4 mb-4 rounded"></div>
@@ -122,7 +123,7 @@ export default function TravelerSection() {
         </div>
 
         {!loading && !error && (
-          <div className="flex flex-row items-center justify-center gap-3 mt-6">
+          <div className="flex flex-row items-center justify-center gap-3 mt-3">
             {testimonials.map((_, index) => (
               <Button
                 key={index}
@@ -136,7 +137,7 @@ export default function TravelerSection() {
           </div>
         )}
       </div>
-      <div className="pb-30 bg-white mt-16"></div>
+      
     </section>
   );
 }
