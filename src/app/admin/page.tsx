@@ -205,7 +205,7 @@ export default function AdminDashboard() {
                       <div className="flex gap-2">
                         <Button
                           
-                          className="bg-orange-500 hover:bg-orange-600"
+                          className="bg-green-500 hover:bg-orange-600 text-white"
                           onClick={() =>
                             handleStatusChange(user.referenceId, "approved")
                           }
@@ -214,7 +214,7 @@ export default function AdminDashboard() {
                         </Button>
                         <Button
                           
-                          className="bg-orange-500 hover:bg-orange-600"
+                          className="bg-red-500 hover:bg-orange-600 text-white"
                           onClick={() =>
                             handleStatusChange(user.referenceId, "declined")
                           }
