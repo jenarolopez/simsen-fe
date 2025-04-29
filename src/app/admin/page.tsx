@@ -94,7 +94,7 @@ export default function AdminDashboard() {
     // Apply status filter
     if (activeFilter !== "all") {
       result = result.filter(
-        (user) => user.status === activeFilter.toUpperCase()
+        (user) => user.status === activeFilter.toLowerCase()
       );
     }
 
